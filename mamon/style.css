@@ -57,10 +57,6 @@ body {
     text-decoration: none;
 }
 .logo_img {
-    display: block;
-    width: 58px;
-    height: 58px;
-    background-image: url(./images/mamon-logo.svg);
     margin-right: 25px;
 }
 .logo_text {
