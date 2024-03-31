@@ -177,6 +177,7 @@ body {
 .social {
     list-style-type: none;
     display: flex;
+    gap: 40px;
 }
 .social>li {
     margin-left: 40px;
