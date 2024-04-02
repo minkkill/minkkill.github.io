@@ -175,11 +175,6 @@ body {
     display: flex;
     gap: 40px;
 }
-.social>li {
-    margin-left: 40px;
-}
-.social>li>a {
-    text-decoration: none;
+.social>i {
     color: #B2B2B2;
-    font-size: 24px;
 }
