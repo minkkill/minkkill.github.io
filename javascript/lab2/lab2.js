@@ -54,7 +54,7 @@ function factorial(n) {
  * @param {number} n - Индекс числа Фибоначчи (натуральное число).
  * @returns {BigInt} - n-е число Фибоначчи.
  */
-function fib(n) {
+export function fib(n) {
     let a = BigInt(0);
     let b = BigInt(1);
     if (n === 0) return BigInt(0);
