@@ -7,7 +7,7 @@
  * @param {number} n - Степень.
  * @return {number} Результат вычисления x, возведенный в степень n.
  */
-function pow(x, n) {
+export function pow(x, n) {
     return x ** n;
 }
 
@@ -18,7 +18,7 @@ function pow(x, n) {
  * @param {number} n - Число n
  * @return {number} Результ вычисления суммы чисел от 1 до n
  */
-function sumTo(n) {
+export function sumTo(n) {
     return n * (n + 1) / 2;
 }
 
@@ -28,7 +28,7 @@ function sumTo(n) {
  * @param {number} year - Год, который проверяем.
  * @return {boolean} Правда, если год викосный, иначе ложь.
  */
-function isLeapYear(year) {
+export function isLeapYear(year) {
     return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
 }
 
@@ -39,7 +39,7 @@ function isLeapYear(year) {
  * @param {number} n - Число.
  * @return {bigint} Факториал числа n.
  */
-function factorial(n) {
+export function factorial(n) {
     n = BigInt(n);
     if (n === 0n || n === 1n) { 
         return 1n;
@@ -73,7 +73,7 @@ export function fib(n) {
  * @param {number} x - Число для сравнения.
  * @returns {function(number): boolean|null} - Функция для сравнения значений.
  */
-function compare(x) {
+export function compare(x) {
     return function(y) {
         if (y > x) {
             return true;
@@ -91,6 +91,6 @@ function compare(x) {
  * @param {...number} args - Аргументы для суммирования.
  * @returns {number} - Сумма всех аргументов.
  */
-function sum(...args) {
+export function sum(...args) {
     return args.reduce((total, num) => total + num, 0);
 }
