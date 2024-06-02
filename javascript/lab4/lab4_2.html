@@ -1,0 +1,65 @@
+<script>
+    class Book {
+        constructor(name, year, cost) {
+            this._name = '';
+            this._year = 0;
+            this._cost = 0;
+
+            this.name = name;
+            this.year = year;
+            this.cost = cost;
+        }
+
+        display() {
+            console.log(`Название: ${this.name}, Цена: ${this.cost}`);
+        }
+
+        get name() {
+            return this._name;
+        }
+
+        get cost() {
+            return this._cost;
+        }
+
+        get year() {
+            return this._year;
+        }
+
+        set name(newName) {
+            if (!newName) {
+                console.error('Название книги не может быть пустым');
+            } else {
+                this._name = newName;
+            }
+        }
+
+        set cost(newCost) {
+            if (newCost <= 0 || typeof newCost !== 'number') {
+                console.error('Цена книги должна быть положительным числом');
+            } else {
+                this._cost = newCost;
+            }
+        }
+
+        set year(newYear) {
+            if (newYear <= 0 || typeof newYear !== 'number') {
+                console.error('Год публикации книги должен быть положительным числом');
+            } else {
+                this._year = newYear;
+            }
+        }
+    }
+
+    const bookInstance = new Book('Изучаем программирование на Python', 2022, 1000);
+
+    bookInstance.name = ''; 
+    bookInstance.year = -2020; 
+    bookInstance.cost = 0;
+
+    bookInstance.name = 'Изучаем Python';
+    bookInstance.year = 2023;
+    bookInstance.cost = 2000;
+
+    bookInstance.display();
+</script>
