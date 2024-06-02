@@ -1,13 +1,19 @@
-<script>
-    let head = document.head.innerHTML;
-    console.log(`head: ${head}`);
-
-    let ul = document.querySelector('ul').innerHTML;
-    console.log(`ul: ${ul}`);
-
-    let li = document.querySelectorAll('li');
-        for (const elem of li) {
-            console.log(`li: ${elem.innerHTML}`);
-        }
-
-</script>
+<body>
+	<div>Пользователи:</div>
+	<ul>
+		<li>Маша</li>
+		<li>Вовочка</li>
+	</ul>
+    <script>
+        let head = document.head.innerHTML;
+        console.log(`head: ${head}`);
+    
+        let ul = document.querySelector('ul').innerHTML;
+        console.log(`ul: ${ul}`);
+    
+        let li = document.querySelectorAll('li');
+            for (const elem of li) {
+                console.log(`li: ${elem.innerHTML}`);
+            }
+    </script>
+</body>
