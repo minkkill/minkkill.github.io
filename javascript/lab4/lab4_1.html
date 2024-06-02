@@ -1,0 +1,18 @@
+<script>
+    "use strict";
+
+    class Book {
+        constructor(name, year, cost) {
+            this.name = name;
+            this.year = year;
+            this.cost = cost;
+        }
+    }
+
+    Book.prototype.display = function () {
+        console.log(`Название книги: "${this.name}"\nЦена книги: \$${this.cost}`);
+    };
+
+    let bookInstance = new Novel("Великий Гэтсби", 1925, 30);
+    bookInstance.display();
+</script>
