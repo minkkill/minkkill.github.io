@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<title>Text</title>
+</head>
+<body cz-shortcut-listen="true">
+	<input type="button" id="hide" value="Спрятать текст">
+
+	<div id="text">Текст</div>
+
+	<script>
+		const button = document.getElementById('hide');
+		const text = document.getElementById('text');
+		button.addEventListener('click', function() {
+			if (button.value == 'Спрятать текст') {
+				button.value = 'Показать текст';
+				text.style.display = 'none';
+			} else {
+				button.value = 'Спрятать текст';
+				text.style.display = 'block';
+			}
+		});
+	</script>
+
+</body></html>
