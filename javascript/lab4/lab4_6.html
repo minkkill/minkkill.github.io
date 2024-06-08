@@ -1,4 +1,6 @@
 <script>
+    'use strict';
+    
     const obj = {
     name: 'Alexandr',
     age: 25,
@@ -9,5 +11,9 @@
     const jsonString = JSON.stringify(obj, null, 2);
     const new_obj = JSON.parse(jsonString);
 
-    console.log(`${JSON.stringify(obj) === JSON.stringify(new_obj) ? 'Объекты равны' : 'Объекты не равны' }`)
+    if (obj === new_obj) {
+        console.log("Объекты равны");
+    } else {
+        console.log("Объекты не равны");
+    }
 </script>
