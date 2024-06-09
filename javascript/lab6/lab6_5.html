@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поле ввода</title>
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            width: 300px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal input {
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: calc(100% - 18px);
+        }
+
+        .modal button {
+            margin-right: 5px;
+            padding: 8px 12px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .modal button.cancel {
+            background-color: #6c757d;
+        }
+
+        .modal button:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div id="modal-message"></div>
+            <input type="text" id="modal-input" />
+            <div>
+                <button id="modal-ok">OK</button>
+                <button id="modal-cancel" class="cancel">ОТМЕНА</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showPrompt(html, callback) {
+            const modal = document.getElementById('modal');
+            const modalMessage = document.getElementById('modal-message');
+            const modalInput = document.getElementById('modal-input');
+            const modalOk = document.getElementById('modal-ok');
+            const modalCancel = document.getElementById('modal-cancel');
+
+            modalMessage.innerHTML = html;
+            modalInput.value = '';
+
+            function closeModal(value) {
+                modal.style.display = 'none';
+                callback(value);
+            }
+
+            function handleKeyDown(event) {
+                if (event.key === 'Escape') {
+                    closeModal(null);
+                } else if (event.key === 'Enter') {
+                    closeModal(modalInput.value);
+                } else if (event.key === 'Tab') {
+                    const focusableElements = [modalInput, modalOk, modalCancel];
+                    const index = focusableElements.indexOf(document.activeElement);
+                    const nextIndex = event.shiftKey ? (index - 1 + focusableElements.length) % focusableElements.length : (index + 1) % focusableElements.length;
+                    focusableElements[nextIndex].focus();
+                    event.preventDefault();
+                }
+            }
+
+            modalOk.onclick = () => closeModal(modalInput.value);
+            modalCancel.onclick = () => closeModal(null);
+            document.addEventListener('keydown', handleKeyDown);
+
+            modal.style.display = 'flex';
+            modalInput.focus();
+
+            modal.addEventListener('transitionend', () => {
+                if (modal.style.display === 'none') {
+                    document.removeEventListener('keydown', handleKeyDown);
+                }
+            }, { once: true });
+        }
+        showPrompt("Введите что-нибудь<br>... умное:)", function(value) {
+            alert(value);
+        });
+    </script>
+</body>
+</html>
