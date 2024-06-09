@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Плейсхолдер-подсказка</title>
+    <style>
+        .input-container {
+            position: relative;
+            width: 100px;
+            margin: 50px auto;
+        }
+        
+        #placeholder-text {
+            text-align: center;
+            position: absolute;
+            top: 0;
+            left: 50%;
+        }
+
+        .placeholder {
+            position: absolute;
+            left: 3px;
+            top: 0px;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="placeholder-text"></div>
+    <div class="input-container">
+        <input type="text" id="myInput" data-placeholder="Введите текст">
+        <label for="myInput" class="placeholder"></label>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const input = document.getElementById('myInput');
+            const placeholderText = input.getAttribute('data-placeholder');
+            const placeholderLabel = document.querySelector('.placeholder');
+            const placeholderDiv = document.getElementById('placeholder-text');
+
+            placeholderLabel.textContent = placeholderText;
+
+            input.addEventListener('focus', function () {
+                placeholderLabel.textContent = '';
+                placeholderDiv.textContent = placeholderText;
+            });
+
+            input.addEventListener('blur', function () {
+                if (input.value === '') {
+                    placeholderLabel.textContent = placeholderText;
+                    placeholderDiv.textContent = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
