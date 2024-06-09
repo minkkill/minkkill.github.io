@@ -5,52 +5,46 @@
 	<title>List</title>
 </head>
 <body>
-  <ul>
-    <li>Животные
-      <ul>
-        <li>Млекопитающие
-          <ul>
-            <li>Коровы</li>
-            <li>Ослы</li>
-            <li>Собаки</li>
-            <li>Тигры</li>
-          </ul>
-        </li>
-        <li>Другие
-          <ul>
-            <li>Змеи</li>
-            <li>Птицы</li>
-            <li>Ящерицы</li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-    <li>Рыбы
-      <ul>
-        <li>Аквариумные
-          <ul>
-            <li>Гуппи</li>
-            <li>Скалярии</li>
-          </ul>
-
-        </li>
-        <li>Морские
-          <ul>
-            <li>Морская форель</li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-  </ul>
+  <div class="container"></div>
 
   <script>
-    let listItems = document.querySelectorAll('ul > li');
-
-    listItems.forEach(item => {
-      let text = item.firstChild.textContent.trim();
-      let count = item.querySelectorAll('li').length;
-      console.log(text + ': ' + count);
+  function createTree(container, data) {
+    Object.keys(data).forEach(key => {
+      const listItem = document.createElement('li');
+      listItem.textContent = key;
+      
+      if (typeof data[key] === 'object') {
+        const nestedList = document.createElement('ul');
+        listItem.appendChild(nestedList);
+        createTree(nestedList, data[key]);
+      } else {
+        listItem.textContent += `: ${data[key]}`;
+      }
+      
+      container.appendChild(listItem);
     });
+  }
+
+  let data = {
+    "Рыбы": {
+      "форель": {},
+      "лосось": {}
+    },
+    "Деревья": {
+      "Огромные": {
+        "секвойя": {},
+        "дуб": {}
+      },
+      "Цветковые": {
+        "яблоня": {},
+        "магнолия": {}
+      }
+    }
+  };
+
+  let container = document.getElementById('container');
+  createTree(container, data);
+
   </script>
 
 </body></html>
