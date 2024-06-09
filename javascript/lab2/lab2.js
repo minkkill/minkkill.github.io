@@ -94,3 +94,16 @@ function compare(x) {
 function sum(...args) {
     return args.reduce((total, num) => total + num, 0);
 }
+
+/** 
+  *  Добавляет черную метку к объекту.
+  *  
+  *  @param {Object} obj - Объект, к которому будет добавлена черная метка.
+  *  @returns {Object} Возвращает объект с добавленной черной меткой.
+*/
+function addBlackSpot(obj) {
+    const blackSpotSymbol = typeof Symbol.for("blackSpot") === 'undefined' ? Symbol.for("blackSpot") : Symbol.for("blackSpot");
+    obj[blackSpotSymbol] = true;
+    return obj;
+}
+
