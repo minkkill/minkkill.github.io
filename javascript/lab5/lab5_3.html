@@ -1,50 +1,50 @@
-
 <!DOCTYPE html>
 <html lang="ru">
-<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>List</title>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>List</title>
 </head>
+
 <body>
   <div id="container"></div>
 
   <script>
-  function createTree(container, data) {
-    Object.keys(data).forEach(key => {
-      const listItem = document.createElement('li');
-      listItem.textContent = key;
-      
-      if (typeof data[key] === 'object') {
-        const nestedList = document.createElement('ul');
-        listItem.appendChild(nestedList);
-        createTree(nestedList, data[key]);
-      } else {
-        listItem.textContent += `: ${data[key]}`;
-      }
-      
-      container.appendChild(listItem);
-    });
-  }
-
-  let data = {
-    "Рыбы": {
-      "форель": {},
-      "лосось": {}
-    },
-    "Деревья": {
-      "Огромные": {
-        "секвойя": {},
-        "дуб": {}
+    let data = {
+      "Рыбы": {
+        "форель": {},
+        "лосось": {}
       },
-      "Цветковые": {
-        "яблоня": {},
-        "магнолия": {}
+      "Деревья": {
+        "Огромные": {
+          "секвойя": {},
+          "дуб": {}
+        },
+        "Цветковые": {
+          "яблоня": {},
+          "магнолия": {}
+        }
       }
-    }
-  };
+    };
 
-  let container = document.getElementById('container');
-  createTree(container, data);
+    function createTree(container, obj) {
+      let ul = document.createElement('ul');
+      for (let key in obj) {
+        let li = document.createElement('li');
+        li.textContent = key;
+        if (Object.keys(obj[key]).length > 0) {
+          createTree(li, obj[key]);
+        }
+        ul.appendChild(li);
+      }
+      container.appendChild(ul);
+    }
+
+    let container = document.getElementById('container');
+    createTree(container, data);
 
   </script>
 
-</body></html>
+</body>
+
+</html>
