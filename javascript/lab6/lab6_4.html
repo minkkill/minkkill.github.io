@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Таблица</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            margin: 0 auto;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .editing {
+            padding: 0;
+        }
+
+        .editing textarea {
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            resize: none;
+            font-family: inherit;
+            font-size: inherit;
+        }
+
+        .buttons {
+            margin-top: 5px;
+        }
+
+        .buttons button {
+            margin-right: 5px;
+            padding: 5px 10px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .buttons button.cancel {
+            background-color: #dc3545;
+        }
+    </style>
+</head>
+
+<body>
+    <table id="editableTable">
+        <tr>
+            <th>Заголовок</th>
+            <th>Заголовок</th>
+            <th>Заголовок</th>
+        </tr>
+        <tr>
+            <td>Ячейка</td>
+            <td>Ячейка</td>
+            <td>Ячейка</td>
+        </tr>
+        <tr>
+            <td>Ячейка</td>
+            <td>Ячейка</td>
+            <td>Ячейка</td>
+        </tr>
+    </table>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const table = document.getElementById('editableTable');
+            let editingTd = null;
+
+            table.addEventListener('click', (event) => {
+                const target = event.target.closest('td');
+
+                if (!target || editingTd || target.nodeName !== 'TD') return;
+
+                editingTd = target;
+                startEditing(editingTd);
+            });
+
+            function startEditing(td) {
+                const textarea = document.createElement('textarea');
+                textarea.value = td.innerHTML;
+
+                const buttonsDiv = document.createElement('div');
+                buttonsDiv.className = 'buttons';
+
+                const okButton = document.createElement('button');
+                okButton.textContent = 'OK';
+                okButton.onclick = () => finishEditing(td, textarea.value);
+
+                const cancelButton = document.createElement('button');
+                cancelButton.textContent = 'ОТМЕНА';
+                cancelButton.onclick = () => cancelEditing(td);
+
+                buttonsDiv.append(okButton, cancelButton);
+
+                td.innerHTML = '';
+                td.classList.add('editing');
+                td.append(textarea, buttonsDiv);
+
+                textarea.focus();
+            }
+
+            function finishEditing(td, value) {
+                td.classList.remove('editing');
+                td.innerHTML = value;
+                editingTd = null;
+            }
+
+            function cancelEditing(td) {
+                td.classList.remove('editing');
+                td.innerHTML = td.originalContent;
+                editingTd = null;
+            }
+
+            document.addEventListener('keydown', (event) => {
+                if (!editingTd) return;
+
+                if (event.key === 'Escape') {
+                    cancelEditing(editingTd);
+                } else if (event.key === 'Enter') {
+                    finishEditing(editingTd, editingTd.querySelector('textarea').value);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
